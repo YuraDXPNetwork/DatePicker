@@ -35,11 +35,22 @@
 }
 .options {
     position: absolute;
+
     top: 30px;
     width: 200px;
-    height: 400px;
+
     background-color: rgb(255, 255, 255);
     box-shadow: 4px 10px 15px 0px rgba(0, 0, 0, 0.087);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.option {
+    padding: 5px 0;
+}
+.option:hover {
+    background-color: aliceblue;
 }
 .select__icon {
     display: flex;

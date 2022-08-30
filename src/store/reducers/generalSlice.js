@@ -5,9 +5,13 @@ const initialState = {};
 const generalSlice = createSlice({
     name: "general",
     initialState,
-    reducers: {},
+    reducers: {
+        setGeneratedCalender(state, action) {
+            state.calender = action.payload;
+        },
+    },
 });
 
-export const {} = generalSlice.actions;
+export const { setGeneratedCalender } = generalSlice.actions;
 
 export default generalSlice.reducer;
