@@ -5,6 +5,8 @@ import Options from "./Options";
 export default function Select() {
     const [opened, setOpened] = useState(false);
 
+    const calender = useSelector((state) => state.general.calender);
+
     return (
         <div
             name="departureMonth"
@@ -13,7 +15,9 @@ export default function Select() {
             onClick={() => setOpened(!opened)}
         >
             <div className="select__icon">&#8964;</div>
-            <div className="select__title">2022 August</div>
+            <div className="select__title">
+                {calender && `${calender[0].Year} ${calender[0].Month}`}
+            </div>
             <Options opened={opened} />
         </div>
     );

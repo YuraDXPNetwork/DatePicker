@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+    monthIndex: 0,
+};
 
 const generalSlice = createSlice({
     name: "general",
@@ -9,9 +11,12 @@ const generalSlice = createSlice({
         setGeneratedCalender(state, action) {
             state.calender = action.payload;
         },
+        setMonthIndex(state, action) {
+            state.monthIndex = action.payload;
+        },
     },
 });
 
-export const { setGeneratedCalender } = generalSlice.actions;
+export const { setGeneratedCalender, setMonthIndex } = generalSlice.actions;
 
 export default generalSlice.reducer;
