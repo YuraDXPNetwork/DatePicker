@@ -42,7 +42,7 @@ export default function Select({ box }) {
         >
             <div className="select__icon">&#8964;</div>
             <div className="select__title">{calender && getTitle()}</div>
-            <Options opened={opened} box={box} />
+            <Options opened={opened} box={box} setOpened={setOpened} />
         </div>
     );
 }

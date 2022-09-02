@@ -53,7 +53,6 @@ export default function DatePicker() {
                 );
 
                 arr?.forEach((element, index) => {
-                    debugger;
                     if (index + 1 === arr.length) {
                         const temp = element.thisMonthDays.slice(
                             0,

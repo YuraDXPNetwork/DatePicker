@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { useDispatch } from "react-redux";
@@ -6,12 +6,16 @@ import {
     setDepartureMonth,
     setReturnMonth,
 } from "../store/reducers/generalSlice";
+import { useOnClickOutside } from "../helpers/hooks";
 
-export default function Options({ opened, box }) {
+export default function Options({ opened, box, setOpened }) {
     const calender = useSelector((state) => state.general.calender);
     const departureMonth = useSelector((state) => state.general.departureMonth);
     const returnMonth = useSelector((state) => state.general.returnMonth);
     const dispatch = useDispatch();
+    const ref = useRef();
+
+    useOnClickOutside(ref, () => setOpened(false));
 
     const onClickHandler = (e, monthIndex) => {
         switch (box) {
@@ -46,7 +50,7 @@ export default function Options({ opened, box }) {
     };
 
     return (
-        <div className={opened ? "options" : "options--closed"}>
+        <div ref={ref} className={opened ? "options" : "options--closed"}>
             {calender?.map((e, index) => (
                 <div
                     style={departureMonth ? getStyle(e) : {}}
