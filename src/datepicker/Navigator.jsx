@@ -14,23 +14,34 @@ export default function Navigator({ box }) {
         (state) => state.general.returnMonthIndex
     );
 
-    const handleClick = (e) => {
-        // debugger;
-        switch (e) {
+    const changeReturnIndex = (btn) => {
+        switch (btn) {
             case "next":
-                if (box === "return" && monthIndex < 13) {
-                    if (monthIndex < 13)
-                        dispatch(setMonthIndex(monthIndex + 1));
-                    dispatch(setReturnMonthIndex(returnMonthIndex + 1));
-                } else if (monthIndex < 13)
-                    dispatch(setMonthIndex(monthIndex + 1));
                 break;
             case "prev":
-                if (box === "return" && monthIndex > 0) {
-                    if (monthIndex > 0) dispatch(setMonthIndex(monthIndex - 1));
-                    dispatch(setReturnMonthIndex(returnMonthIndex - 1));
-                } else if (monthIndex > 0)
-                    dispatch(setMonthIndex(monthIndex - 1));
+                break;
+            default:
+                break;
+        }
+    };
+    const changeDepartureIndex = (btn) => {
+        switch (btn) {
+            case "next":
+                break;
+            case "prev":
+                break;
+            default:
+                break;
+        }
+    };
+
+    const handleClick = (btn) => {
+        switch (box) {
+            case "return":
+                changeReturnIndex(btn);
+                break;
+            case "departure":
+                changeDepartureIndex(btn);
                 break;
             default:
                 break;
