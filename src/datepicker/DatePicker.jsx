@@ -41,7 +41,7 @@ export default function DatePicker() {
                             departureDay.departureMonthIndex
                         ].thisMonthDays.slice(
                             departureDay.index,
-                            returnDate.index
+                            returnDate.index + 1
                         )
                     )
                 );
@@ -57,7 +57,7 @@ export default function DatePicker() {
                     if (index + 1 === arr.length) {
                         const temp = element.thisMonthDays.slice(
                             0,
-                            returnDate.index
+                            returnDate.index + 1
                         );
                         vacation.push(...temp);
                     } else vacation.push(...element.thisMonthDays);

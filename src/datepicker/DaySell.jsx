@@ -18,13 +18,15 @@ export default function DaySell({ index, day, box }) {
     const vacation = useSelector((state) => state.general.vacation);
     const [inVacationDays, setInVacationDays] = useState();
     // const returnDay = useSelector((state) => state.general.returnDay);
-    // const departureDay = useSelector((state) => state.general.departureDay);
+    const departureDay = useSelector((state) => state.general.departureDay);
     const departureMonthIndex = useSelector(
         (state) => state.general.departureMonthIndex
     );
     const returnMonthIndex = useSelector(
         (state) => state.general.returnMonthIndex
     );
+
+    console.log(day.day, departureDay?.day.day === day.day);
 
     const isInVacationDays = () => {
         const isIn = vacation?.some((e) => e.day === day.day);
@@ -103,7 +105,9 @@ export default function DaySell({ index, day, box }) {
             style={firstSell ? getMarginLeft() : {}}
             key={index}
             className={`day__cell ${isPastDay() ? "past" : ""} ${
-                inVacationDays ? "vacation" : ""
+                inVacationDays || departureDay?.day.day === day.day
+                    ? "vacation"
+                    : ""
             }`}
             onClick={handleClick}
         >
