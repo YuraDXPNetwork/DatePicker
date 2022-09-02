@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { setReturnMonth } from "../store/reducers/generalSlice";
 import Options from "./Options";
 
 export default function Select({ box }) {
+    const dispatch = useDispatch();
+
     const [opened, setOpened] = useState(false);
 
     const calender = useSelector((state) => state.general.calender);
@@ -25,7 +29,9 @@ export default function Select({ box }) {
         }
     };
 
-    // console.log(getTitle());
+    useEffect(() => {
+        if (departureMonth) dispatch(setReturnMonth(departureMonth));
+    }, [departureMonth]);
 
     return (
         <div

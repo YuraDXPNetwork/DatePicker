@@ -1,17 +1,20 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import {
+    setDepartureDate,
+    setReturnDate,
+} from "../store/reducers/generalSlice";
 
-export default function DaySell({ index, day }) {
+export default function DaySell({ index, day, box }) {
+    const dispatch = useDispatch();
+
     const [fullDayName, setFullDayName] = useState();
 
     const departureMonth = useSelector((state) => state.general.departureMonth);
     const returnMonth = useSelector((state) => state.general.returnMonth);
     const toDay = useSelector((state) => state.general.toDay);
-    console.log(
-        toDay.format("YYYY-MM-DD").toString().slice(0, 10).replaceAll("-", ""),
-        day.day.replaceAll("-", "")
-    );
 
     const isPastDay = () => {
         return toDay
@@ -47,11 +50,24 @@ export default function DaySell({ index, day }) {
         }
     };
 
-    const styles = {
+    const firstSellStyles = {
         marginLeft: getMarginLeft(),
         backgroundColor: isPastDay() ? "transparent" : "#e4f0f1",
         color: isPastDay() ? "#cfcfcf" : "#347d77",
-        pointerEvents: isPastDay() ? "none" : "",
+        pointerEvents: isPastDay() ? "none" : "all",
+    };
+
+    const handleClick = () => {
+        switch (box) {
+            case "return":
+                dispatch(setReturnDate(day));
+                break;
+            case "departure":
+                dispatch(setDepartureDate(day));
+                break;
+            default:
+                break;
+        }
     };
 
     useEffect(() => {
@@ -62,7 +78,12 @@ export default function DaySell({ index, day }) {
     useEffect(() => {}, [departureMonth, returnMonth]);
 
     return (
-        <span style={firstSell ? styles : {}} key={index} className="day__cell">
+        <span
+            style={firstSell ? firstSellStyles : {}}
+            key={index}
+            className="day__cell"
+            onClick={handleClick}
+        >
             {index + 1}
         </span>
     );

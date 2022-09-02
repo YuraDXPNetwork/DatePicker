@@ -27,10 +27,18 @@ const generalSlice = createSlice({
         setToDay(state, action) {
             state.toDay = action.payload;
         },
+        setDepartureDate(state, action) {
+            state.departureDay = action.payload;
+        },
+        setReturnDate(state, action) {
+            state.returnDate = action.payload;
+        },
     },
 });
 
 export const {
+    setReturnDate,
+    setDepartureDate,
     setToDay,
     setGeneratedCalender,
     setMonthIndex,

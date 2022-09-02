@@ -18,6 +18,7 @@ export default function Days({ month, box }) {
                             key={`${index}_${e.Month}`}
                             day={e}
                             index={index}
+                            box={box}
                         />
                     ));
                 } else
@@ -26,6 +27,7 @@ export default function Days({ month, box }) {
                             key={`${index}_${e.Month}`}
                             day={e}
                             index={index}
+                            box={box}
                         />
                     ));
 
@@ -36,6 +38,7 @@ export default function Days({ month, box }) {
                             key={`${index}_${e.Month}`}
                             day={e}
                             index={index}
+                            box={box}
                         />
                     ));
                 } else
@@ -44,6 +47,7 @@ export default function Days({ month, box }) {
                             key={`${index}_${e.Month}`}
                             day={e}
                             index={index}
+                            box={box}
                         />
                     ));
             default:
