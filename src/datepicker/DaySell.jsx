@@ -15,8 +15,10 @@ export default function DaySell({ index, day, box }) {
     const departureMonth = useSelector((state) => state.general.departureMonth);
     const returnMonth = useSelector((state) => state.general.returnMonth);
     const toDay = useSelector((state) => state.general.toDay);
-    const returnDay = useSelector((state) => state.general.returnDay);
-    const departureDay = useSelector((state) => state.general.departureDay);
+    const vacation = useSelector((state) => state.general.vacation);
+    const [inVacationDays, setInVacationDays] = useState();
+    // const returnDay = useSelector((state) => state.general.returnDay);
+    // const departureDay = useSelector((state) => state.general.departureDay);
     const departureMonthIndex = useSelector(
         (state) => state.general.departureMonthIndex
     );
@@ -24,11 +26,10 @@ export default function DaySell({ index, day, box }) {
         (state) => state.general.returnMonthIndex
     );
 
-    // const equal =
-    //     box === "return"
-    //         ? day.day.replaceAll("-", "") === returnDay?.day.replaceAll("-", "")
-    //         : day.day.replaceAll("-", "") ===
-    //           departureDay?.day.replaceAll("-", "");
+    const isInVacationDays = () => {
+        const isIn = vacation?.some((e) => e.day === day.day);
+        setInVacationDays(isIn);
+    };
 
     const isPastDay = () => {
         return toDay
@@ -92,7 +93,8 @@ export default function DaySell({ index, day, box }) {
     useEffect(() => {
         const fullName = moment(day.day).format("dddd");
         setFullDayName(fullName);
-    }, [day]);
+        isInVacationDays();
+    }, [day, vacation]);
 
     useEffect(() => {}, [departureMonth, returnMonth]);
 
@@ -100,7 +102,9 @@ export default function DaySell({ index, day, box }) {
         <span
             style={firstSell ? getMarginLeft() : {}}
             key={index}
-            className={`day__cell ${isPastDay() ? "past" : ""}`}
+            className={`day__cell ${isPastDay() ? "past" : ""} ${
+                inVacationDays ? "vacation" : ""
+            }`}
             onClick={handleClick}
         >
             {index + 1}

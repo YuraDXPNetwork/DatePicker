@@ -122,6 +122,7 @@
     pointer-events: none;
 }
 
+.vacation,
 .day__cell:hover {
     background-color: #347d77;
     color: #f9fcfb;

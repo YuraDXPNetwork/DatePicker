@@ -37,10 +37,14 @@ const generalSlice = createSlice({
         setReturnDate(state, action) {
             state.returnDate = action.payload;
         },
+        setVacation(state, action) {
+            state.vacation = action.payload;
+        },
     },
 });
 
 export const {
+    setVacation,
     setReturnDate,
     setDepartureDate,
     setToDay,

@@ -2,7 +2,12 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setToDay } from "../store/reducers/generalSlice";
+import {
+    setDepartureDate,
+    setReturnDate,
+    setToDay,
+    setVacation,
+} from "../store/reducers/generalSlice";
 import DateBox from "./DateBox";
 import "./DatePicker.css";
 
@@ -24,23 +29,41 @@ export default function DatePicker() {
     }, []);
 
     useEffect(() => {
+        // debugger;
         if (returnDate && returnDate) {
             if (
                 departureDay?.departureMonthIndex ===
                 returnDate?.returnMonthIndex
             ) {
-                console.log(
-                    calender[
-                        departureDay.departureMonthIndex
-                    ].thisMonthDays.slice(departureDay.index, returnDate.index)
+                dispatch(
+                    setVacation(
+                        calender[
+                            departureDay.departureMonthIndex
+                        ].thisMonthDays.slice(
+                            departureDay.index,
+                            returnDate.index
+                        )
+                    )
                 );
+            } else {
+                let vacation = [];
+                const arr = calender.slice(
+                    departureDay?.departureMonthIndex,
+                    returnDate?.returnMonthIndex + 1
+                );
+
+                arr?.forEach((element, index) => {
+                    debugger;
+                    if (index + 1 === arr.length) {
+                        const temp = element.thisMonthDays.slice(
+                            0,
+                            returnDate.index
+                        );
+                        vacation.push(...temp);
+                    } else vacation.push(...element.thisMonthDays);
+                });
+                dispatch(setVacation(vacation));
             }
-            console.log(
-                calender.slice(
-                    departureDay.departureMonthIndex,
-                    returnDate.returnMonthIndex
-                )
-            );
         }
     }, [departureDay, returnDate]);
 
