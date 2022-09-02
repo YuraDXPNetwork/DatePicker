@@ -4,12 +4,25 @@ import { useSelector } from "react-redux";
 
 export default function DaySell({ index, day }) {
     const [fullDayName, setFullDayName] = useState();
-    if (index === 0) {
-        console.log(fullDayName);
-    }
+
     const departureMonth = useSelector((state) => state.general.departureMonth);
     const returnMonth = useSelector((state) => state.general.returnMonth);
-    const thisDayDate = day.day;
+    const toDay = useSelector((state) => state.general.toDay);
+    console.log(
+        toDay.format("YYYY-MM-DD").toString().slice(0, 10).replaceAll("-", ""),
+        day.day.replaceAll("-", "")
+    );
+
+    const isPastDay = () => {
+        return toDay
+            .format("YYYY-MM-DD")
+            .toString()
+            .slice(0, 10)
+            .replaceAll("-", "") > day.day.replaceAll("-", "")
+            ? true
+            : false;
+    };
+
     const firstSell = index === 0;
 
     const getMarginLeft = () => {
@@ -18,20 +31,27 @@ export default function DaySell({ index, day }) {
             case "Monday":
                 return 0;
             case "Tuesday":
-                return { marginLeft: "42px" };
+                return "42px";
             case "Wednesday":
-                return { marginLeft: "84px" };
+                return "84px";
             case "Thursday":
-                return { marginLeft: "126px" };
+                return "126px";
             case "Friday":
-                return { marginLeft: "168px" };
+                return "168px";
             case "Saturday":
-                return { marginLeft: "210px" };
+                return "210px";
             case "Sunday":
-                return { marginLeft: "252px" };
+                return "252px";
             default:
                 break;
         }
+    };
+
+    const styles = {
+        marginLeft: getMarginLeft(),
+        backgroundColor: isPastDay() ? "transparent" : "#e4f0f1",
+        color: isPastDay() ? "#cfcfcf" : "#347d77",
+        pointerEvents: isPastDay() ? "none" : "",
     };
 
     useEffect(() => {
@@ -42,11 +62,7 @@ export default function DaySell({ index, day }) {
     useEffect(() => {}, [departureMonth, returnMonth]);
 
     return (
-        <span
-            style={firstSell ? getMarginLeft() : {}}
-            key={index}
-            className="day__cell"
-        >
+        <span style={firstSell ? styles : {}} key={index} className="day__cell">
             {index + 1}
         </span>
     );
