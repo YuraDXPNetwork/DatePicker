@@ -19,10 +19,14 @@ const generalSlice = createSlice({
             state.returnMonthIndex = action.payload;
         },
         setDepartureMonth(state, action) {
-            state.departureMonth = action.payload;
+            const { monthIndex, e } = action.payload;
+            state.departureMonth = e;
+            state.departureMonthIndex = monthIndex;
         },
         setReturnMonth(state, action) {
-            state.returnMonth = action.payload;
+            const { monthIndex, e } = action.payload;
+            state.returnMonth = e;
+            state.returnMonthIndex = monthIndex;
         },
         setToDay(state, action) {
             state.toDay = action.payload;

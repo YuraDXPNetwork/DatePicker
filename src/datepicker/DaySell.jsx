@@ -15,6 +15,20 @@ export default function DaySell({ index, day, box }) {
     const departureMonth = useSelector((state) => state.general.departureMonth);
     const returnMonth = useSelector((state) => state.general.returnMonth);
     const toDay = useSelector((state) => state.general.toDay);
+    const returnDay = useSelector((state) => state.general.returnDay);
+    const departureDay = useSelector((state) => state.general.departureDay);
+    const departureMonthIndex = useSelector(
+        (state) => state.general.departureMonthIndex
+    );
+    const returnMonthIndex = useSelector(
+        (state) => state.general.returnMonthIndex
+    );
+
+    // const equal =
+    //     box === "return"
+    //         ? day.day.replaceAll("-", "") === returnDay?.day.replaceAll("-", "")
+    //         : day.day.replaceAll("-", "") ===
+    //           departureDay?.day.replaceAll("-", "");
 
     const isPastDay = () => {
         return toDay
@@ -32,38 +46,43 @@ export default function DaySell({ index, day, box }) {
         // debugger;
         switch (fullDayName) {
             case "Monday":
-                return 0;
+                return { marginLeft: 0 };
             case "Tuesday":
-                return "42px";
+                return { marginLeft: "42px" };
             case "Wednesday":
-                return "84px";
+                return { marginLeft: "84px" };
             case "Thursday":
-                return "126px";
+                return { marginLeft: "126px" };
             case "Friday":
-                return "168px";
+                return { marginLeft: "168px" };
             case "Saturday":
-                return "210px";
+                return { marginLeft: "210px" };
             case "Sunday":
-                return "252px";
+                return { marginLeft: "252px" };
             default:
                 break;
         }
     };
 
-    const firstSellStyles = {
-        marginLeft: getMarginLeft(),
-        backgroundColor: isPastDay() ? "transparent" : "#e4f0f1",
-        color: isPastDay() ? "#cfcfcf" : "#347d77",
-        pointerEvents: isPastDay() ? "none" : "all",
-    };
-
     const handleClick = () => {
         switch (box) {
             case "return":
-                dispatch(setReturnDate(day));
+                dispatch(
+                    setReturnDate({
+                        returnMonthIndex: returnMonthIndex || 0,
+                        index,
+                        day,
+                    })
+                );
                 break;
             case "departure":
-                dispatch(setDepartureDate(day));
+                dispatch(
+                    setDepartureDate({
+                        departureMonthIndex: departureMonthIndex || 0,
+                        index,
+                        day,
+                    })
+                );
                 break;
             default:
                 break;
@@ -79,9 +98,9 @@ export default function DaySell({ index, day, box }) {
 
     return (
         <span
-            style={firstSell ? firstSellStyles : {}}
+            style={firstSell ? getMarginLeft() : {}}
             key={index}
-            className="day__cell"
+            className={`day__cell ${isPastDay() ? "past" : ""}`}
             onClick={handleClick}
         >
             {index + 1}

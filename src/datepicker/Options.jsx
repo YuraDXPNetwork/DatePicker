@@ -9,21 +9,39 @@ import {
 
 export default function Options({ opened, box }) {
     const calender = useSelector((state) => state.general.calender);
+    const departureMonth = useSelector((state) => state.general.departureMonth);
+    const returnMonth = useSelector((state) => state.general.returnMonth);
     const dispatch = useDispatch();
 
-    const onClickHandler = (e) => {
-        // console.log(e.thisMonthDays[0].day);
-        const day = moment(e.thisMonthDays[0].day);
-
+    const onClickHandler = (e, monthIndex) => {
         switch (box) {
             case "departure":
-                dispatch(setDepartureMonth(e));
+                dispatch(setDepartureMonth({ monthIndex, e }));
                 break;
             case "return":
-                dispatch(setReturnMonth(e));
+                dispatch(setReturnMonth({ monthIndex, e }));
                 break;
             default:
                 break;
+        }
+    };
+
+    const getStyle = (e) => {
+        // debugger;
+        if (box === "return") {
+            const currentMonthNum = moment().month(e.Month).format("YYYYMM");
+            const departureMonthNum = moment()
+                .month(departureMonth.Month)
+                .format("YYYYMM");
+
+            const currentYearMonth = `${currentMonthNum}`;
+            if (e.Year === "2023") return;
+            else if (Number(currentYearMonth) < Number(departureMonthNum)) {
+                return {
+                    opacity: "0.6",
+                    pointerEvents: "none",
+                };
+            }
         }
     };
 
@@ -31,7 +49,8 @@ export default function Options({ opened, box }) {
         <div className={opened ? "options" : "options--closed"}>
             {calender?.map((e, index) => (
                 <div
-                    onClick={() => onClickHandler(e)}
+                    style={departureMonth ? getStyle(e) : {}}
+                    onClick={() => onClickHandler(e, index)}
                     className="option"
                     key={`${index}_${e.Month}`}
                 >

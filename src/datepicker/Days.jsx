@@ -4,6 +4,7 @@ import DaySell from "./DaySell";
 
 export default function Days({ month, box }) {
     const departureMonth = useSelector((state) => state.general.departureMonth);
+
     const returnMonth = useSelector((state) => state.general.returnMonth);
 
     const calender = useSelector((state) => state.general.calender);

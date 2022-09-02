@@ -116,6 +116,12 @@
     cursor: pointer;
 }
 
+.past {
+    background-color: transparent;
+    color: #cfcfcf;
+    pointer-events: none;
+}
+
 .day__cell:hover {
     background-color: #347d77;
     color: #f9fcfb;
