@@ -1,15 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import DaySell from "./DaySell";
 
-export default function Days({ month }) {
-    return (
-        <div className="days">
-            {month.map((e, index) => {
-                return (
-                    <span key={index} className="day__cell">
-                        {e}
-                    </span>
-                );
-            })}
-        </div>
-    );
+export default function Days({ month, box }) {
+    const departureMonth = useSelector((state) => state.general.departureMonth);
+    const returnMonth = useSelector((state) => state.general.returnMonth);
+
+    const calender = useSelector((state) => state.general.calender);
+
+    const showDays = () => {
+        // debugger;
+        switch (box) {
+            case "departure":
+                if (departureMonth) {
+                    return departureMonth?.thisMonthDays.map((e, index) => (
+                        <DaySell
+                            key={`${index}_${e.Month}`}
+                            day={e}
+                            index={index}
+                        />
+                    ));
+                } else
+                    return calender[0].thisMonthDays.map((e, index) => (
+                        <DaySell
+                            key={`${index}_${e.Month}`}
+                            day={e}
+                            index={index}
+                        />
+                    ));
+
+            case "return":
+                if (returnMonth) {
+                    return returnMonth?.thisMonthDays.map((e, index) => (
+                        <DaySell
+                            key={`${index}_${e.Month}`}
+                            day={e}
+                            index={index}
+                        />
+                    ));
+                } else
+                    return calender[0].thisMonthDays.map((e, index) => (
+                        <DaySell
+                            key={`${index}_${e.Month}`}
+                            day={e}
+                            index={index}
+                        />
+                    ));
+            default:
+                break;
+        }
+    };
+
+    useEffect(() => {
+        return () => {};
+    }, [departureMonth, departureMonth]);
+
+    return <div className="days">{showDays()}</div>;
 }

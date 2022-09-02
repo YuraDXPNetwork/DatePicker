@@ -14,15 +14,20 @@ const MONTHS = () => {
 const months = MONTHS();
 
 const generateDatesOfAMonth = (e) => {
-    let start_date_of_month = moment().format("YYYY-MM-01"),
+    let counter = 1;
+    let start_date_of_month = moment().format(
+            `${e.slice(0, 4)}-${e.slice(5)}-01`
+        ),
         end_date_of_month =
-            moment().format("YYYY-MM-") + moment(e).daysInMonth(),
+            moment().format(`${e.slice(0, 4)}-${e.slice(5)}-`) +
+            moment(e).daysInMonth(),
         dayArray = [];
     while (start_date_of_month <= end_date_of_month) {
         dayArray.push({ day: start_date_of_month });
         start_date_of_month = moment(start_date_of_month)
             .add(1, "days")
             .format("YYYY-MM-DD");
+        counter = counter + 1;
     }
     return dayArray;
 };
