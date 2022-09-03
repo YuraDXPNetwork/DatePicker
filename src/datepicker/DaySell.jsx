@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { getMarginLeft, isPastDay } from "../helpers/helpers";
 import {
     setDepartureDate,
     setReturnDate,
@@ -17,7 +18,6 @@ export default function DaySell({ index, day, box }) {
     const toDay = useSelector((state) => state.general.toDay);
     const vacation = useSelector((state) => state.general.vacation);
     const [inVacationDays, setInVacationDays] = useState();
-    // const returnDay = useSelector((state) => state.general.returnDay);
     const departureDay = useSelector((state) => state.general.departureDay);
     const departureMonthIndex = useSelector(
         (state) => state.general.departureMonthIndex
@@ -25,46 +25,11 @@ export default function DaySell({ index, day, box }) {
     const returnMonthIndex = useSelector(
         (state) => state.general.returnMonthIndex
     );
-
-    console.log(day.day, departureDay?.day.day === day.day);
+    const firstSell = index === 0;
 
     const isInVacationDays = () => {
         const isIn = vacation?.some((e) => e.day === day.day);
         setInVacationDays(isIn);
-    };
-
-    const isPastDay = () => {
-        return toDay
-            .format("YYYY-MM-DD")
-            .toString()
-            .slice(0, 10)
-            .replaceAll("-", "") > day.day.replaceAll("-", "")
-            ? true
-            : false;
-    };
-
-    const firstSell = index === 0;
-
-    const getMarginLeft = () => {
-        // debugger;
-        switch (fullDayName) {
-            case "Monday":
-                return { marginLeft: 0 };
-            case "Tuesday":
-                return { marginLeft: "42px" };
-            case "Wednesday":
-                return { marginLeft: "84px" };
-            case "Thursday":
-                return { marginLeft: "126px" };
-            case "Friday":
-                return { marginLeft: "168px" };
-            case "Saturday":
-                return { marginLeft: "210px" };
-            case "Sunday":
-                return { marginLeft: "252px" };
-            default:
-                break;
-        }
     };
 
     const handleClick = () => {
@@ -102,9 +67,9 @@ export default function DaySell({ index, day, box }) {
 
     return (
         <span
-            style={firstSell ? getMarginLeft() : {}}
+            style={firstSell ? getMarginLeft(fullDayName) : {}}
             key={index}
-            className={`day__cell ${isPastDay() ? "past" : ""} ${
+            className={`day__cell ${isPastDay(toDay, day) ? "past" : ""} ${
                 inVacationDays || departureDay?.day.day === day.day
                     ? "vacation"
                     : ""

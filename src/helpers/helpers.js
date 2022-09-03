@@ -86,3 +86,91 @@ export const generateCal = () => {
     });
     return generated;
 };
+
+export const isPastDay = (toDay, day) => {
+    return toDay
+        .format("YYYY-MM-DD")
+        .toString()
+        .slice(0, 10)
+        .replaceAll("-", "") > day.day.replaceAll("-", "")
+        ? true
+        : false;
+};
+
+export const getMarginLeft = (fullDayName) => {
+    // debugger;
+    switch (fullDayName) {
+        case "Monday":
+            return { marginLeft: 0 };
+        case "Tuesday":
+            return { marginLeft: "42px" };
+        case "Wednesday":
+            return { marginLeft: "84px" };
+        case "Thursday":
+            return { marginLeft: "126px" };
+        case "Friday":
+            return { marginLeft: "168px" };
+        case "Saturday":
+            return { marginLeft: "210px" };
+        case "Sunday":
+            return { marginLeft: "252px" };
+        default:
+            break;
+    }
+};
+
+export const getShortName = (e) => {
+    switch (e) {
+        case 1:
+            return "Mo";
+        case 2:
+            return "Tu";
+        case 3:
+            return "We";
+        case 4:
+            return "Th";
+        case 5:
+            return "Fr";
+        case 6:
+            return "St";
+        case 7:
+            return "Su";
+
+        default:
+            break;
+    }
+};
+
+export const getTitle = (box, departureMonth, calender, returnMonth) => {
+    // debugger;
+    switch (box) {
+        case "departure":
+            return departureMonth
+                ? `${departureMonth?.Year} ${departureMonth?.Month}`
+                : `${calender[0]?.Year} ${calender[0]?.Month}`;
+        case "return":
+            return returnMonth
+                ? `${returnMonth?.Year} ${returnMonth?.Month}`
+                : `${calender[0]?.Year} ${calender[0]?.Month}`;
+        default:
+    }
+};
+
+export const getStyle = (e, box, departureMonth) => {
+    // debugger;
+    if (box === "return") {
+        const currentMonthNum = moment().month(e.Month).format("YYYYMM");
+        const departureMonthNum = moment()
+            .month(departureMonth.Month)
+            .format("YYYYMM");
+
+        const currentYearMonth = `${currentMonthNum}`;
+        if (e.Year === "2023") return;
+        else if (Number(currentYearMonth) < Number(departureMonthNum)) {
+            return {
+                opacity: "0.6",
+                pointerEvents: "none",
+            };
+        }
+    }
+};

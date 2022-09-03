@@ -1,51 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {
-    setMonthIndex,
-    setReturnMonthIndex,
-} from "../store/reducers/generalSlice";
+import {} from "../store/reducers/generalSlice";
 import Select from "./Select";
 
 export default function Navigator({ box }) {
     const dispatch = useDispatch();
     const monthIndex = useSelector((state) => state.general.monthIndex);
-    const returnMonthIndex = useSelector(
-        (state) => state.general.returnMonthIndex
-    );
 
-    const changeReturnIndex = (btn) => {
-        switch (btn) {
-            case "next":
-                break;
-            case "prev":
-                break;
-            default:
-                break;
-        }
-    };
-    const changeDepartureIndex = (btn) => {
-        switch (btn) {
-            case "next":
-                break;
-            case "prev":
-                break;
-            default:
-                break;
-        }
-    };
-
-    const handleClick = (btn) => {
-        switch (box) {
-            case "return":
-                changeReturnIndex(btn);
-                break;
-            case "departure":
-                changeDepartureIndex(btn);
-                break;
-            default:
-                break;
-        }
+    const handleClick = () => {
+        // TODO navigate in months by clicking on next and prev buttons
     };
 
     return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { getTitle } from "../helpers/helpers";
 import { setReturnMonth } from "../store/reducers/generalSlice";
 import Options from "./Options";
 
@@ -14,21 +15,6 @@ export default function Select({ box }) {
 
     const returnMonth = useSelector((state) => state.general.returnMonth);
 
-    const getTitle = () => {
-        // debugger;
-        switch (box) {
-            case "departure":
-                return departureMonth
-                    ? `${departureMonth?.Year} ${departureMonth?.Month}`
-                    : `${calender[0]?.Year} ${calender[0]?.Month}`;
-            case "return":
-                return returnMonth
-                    ? `${returnMonth?.Year} ${returnMonth?.Month}`
-                    : `${calender[0]?.Year} ${calender[0]?.Month}`;
-            default:
-        }
-    };
-
     useEffect(() => {
         if (departureMonth) dispatch(setReturnMonth(departureMonth));
     }, [departureMonth]);
@@ -41,7 +27,10 @@ export default function Select({ box }) {
             onClick={() => setOpened(!opened)}
         >
             <div className="select__icon">&#8964;</div>
-            <div className="select__title">{calender && getTitle()}</div>
+            <div className="select__title">
+                {calender &&
+                    getTitle(box, departureMonth, calender, returnMonth)}
+            </div>
             <Options opened={opened} box={box} setOpened={setOpened} />
         </div>
     );

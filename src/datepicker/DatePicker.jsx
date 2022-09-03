@@ -2,12 +2,7 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {
-    setDepartureDate,
-    setReturnDate,
-    setToDay,
-    setVacation,
-} from "../store/reducers/generalSlice";
+import { setToDay, setVacation } from "../store/reducers/generalSlice";
 import DateBox from "./DateBox";
 import "./DatePicker.css";
 
