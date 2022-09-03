@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getTitle } from "../helpers/helpers";
 import { setReturnMonth } from "../store/reducers/generalSlice";
 import Options from "./Options";
+import arrowHeadDown from "../icons/arrowheaddown.svg";
 
 export default function Select({ box }) {
     const dispatch = useDispatch();
@@ -26,7 +27,9 @@ export default function Select({ box }) {
             className={opened ? "month__select" : "month__select--closed"}
             onClick={() => setOpened(!opened)}
         >
-            <div className="select__icon">&#8964;</div>
+            <div className="select__icon">
+                <img src={arrowHeadDown} alt="" />
+            </div>
             <div className="select__title">
                 {calender &&
                     getTitle(box, departureMonth, calender, returnMonth)}
