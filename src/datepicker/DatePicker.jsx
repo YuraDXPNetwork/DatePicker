@@ -64,7 +64,7 @@ export default function DatePicker() {
     return (
         <div className="datePicker__container">
             <DateBox box={"return"} week={week} />
-            <div className="line"></div>
+            {window.innerWidth > 425 && <div className="line"></div>}
             <DateBox box={"departure"} week={week} />
         </div>
     );
