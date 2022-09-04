@@ -10,10 +10,6 @@ export default function Days({ month, box }) {
     const returnMonthIndex = useSelector(
         (state) => state.general.returnMonthIndex
     );
-    console.log(
-        "🚀 ~ file: Days.jsx ~ line 13 ~ Days ~ returnMonthIndex",
-        returnMonthIndex
-    );
 
     const calender = useSelector((state) => state.general.calender);
 

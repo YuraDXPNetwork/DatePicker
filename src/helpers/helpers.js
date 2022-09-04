@@ -161,21 +161,20 @@ export const getTitle = (
     }
 };
 
-export const getStyle = (e, box, departureMonth) => {
-    // debugger;
-    if (box === "return") {
-        const currentMonthNum = moment().month(e.Month).format("YYYYMM");
-        const departureMonthNum = moment()
-            .month(departureMonth.Month)
-            .format("YYYYMM");
+export const getStyle = (e, departureMonth, calender) => {
+    debugger;
 
-        const currentYearMonth = `${currentMonthNum}`;
-        if (e.Year === "2023") return;
-        else if (Number(currentYearMonth) < Number(departureMonthNum)) {
-            return {
-                opacity: "0.6",
-                pointerEvents: "none",
-            };
-        }
+    const currentMonthNum = moment().month(e.Month).format("YYYYMM");
+    const departureMonthNum = moment()
+        .month(calender[departureMonth].Month)
+        .format("YYYYMM");
+
+    const currentYearMonth = `${currentMonthNum}`;
+    if (e.Year === "2023") return;
+    else if (Number(currentYearMonth) < Number(departureMonthNum)) {
+        return {
+            opacity: "0.6",
+            pointerEvents: "none",
+        };
     }
 };

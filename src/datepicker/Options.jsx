@@ -11,7 +11,9 @@ import { getStyle } from "../helpers/helpers";
 
 export default function Options({ opened, box, setOpened }) {
     const calender = useSelector((state) => state.general.calender);
-    const departureMonth = useSelector((state) => state.general.departureMonth);
+    const departureMonthIndex = useSelector(
+        (state) => state.general.departureMonthIndex
+    );
     const dispatch = useDispatch();
     const ref = useRef();
 
@@ -35,7 +37,9 @@ export default function Options({ opened, box, setOpened }) {
             {calender?.map((e, index) => (
                 <div
                     style={
-                        departureMonth ? getStyle(e, box, departureMonth) : {}
+                        departureMonthIndex && box === "return"
+                            ? getStyle(e, departureMonthIndex, calender)
+                            : {}
                     }
                     onClick={() => onClickHandler(e, index)}
                     className="option"

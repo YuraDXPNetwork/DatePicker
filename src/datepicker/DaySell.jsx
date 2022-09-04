@@ -13,9 +13,8 @@ export default function DaySell({ index, day, box }) {
 
     const [fullDayName, setFullDayName] = useState();
 
-    const departureMonth = useSelector((state) => state.general.departureMonth);
-    const returnMonth = useSelector((state) => state.general.returnMonth);
     const toDay = useSelector((state) => state.general.toDay);
+
     const vacation = useSelector((state) => state.general.vacation);
     const [inVacationDays, setInVacationDays] = useState();
     const departureDay = useSelector((state) => state.general.departureDay);
@@ -32,6 +31,13 @@ export default function DaySell({ index, day, box }) {
         const isIn = vacation?.some((e) => e.day === day.day);
         setInVacationDays(isIn);
     };
+
+    console.log(
+        day.day.replaceAll("-", ""),
+        Number(day.day.replaceAll("-", "")) <
+            Number(departureDay?.day.day.replaceAll("-", "")),
+        departureDay?.day.day.replaceAll("-", "")
+    );
 
     const handleClick = () => {
         switch (box) {
@@ -70,7 +76,14 @@ export default function DaySell({ index, day, box }) {
         <span
             style={firstSell ? getMarginLeft(fullDayName) : {}}
             key={index}
-            className={`day__cell ${isPastDay(toDay, day) ? "past" : ""} ${
+            className={`day__cell ${
+                isPastDay(toDay, day) ||
+                (Number(day.day.replaceAll("-", "")) <
+                    Number(departureDay?.day.day.replaceAll("-", "")) &&
+                    box === "return")
+                    ? "past"
+                    : ""
+            } ${
                 inVacationDays || departureDay?.day.day === day.day
                     ? "vacation"
                     : ""
