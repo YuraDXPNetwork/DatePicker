@@ -25,6 +25,7 @@ export default function DaySell({ index, day, box }) {
     const returnMonthIndex = useSelector(
         (state) => state.general.returnMonthIndex
     );
+
     const firstSell = index === 0;
 
     const isInVacationDays = () => {
@@ -63,7 +64,7 @@ export default function DaySell({ index, day, box }) {
         isInVacationDays();
     }, [day, vacation]);
 
-    useEffect(() => {}, [departureMonth, returnMonth]);
+    useEffect(() => {}, [departureMonthIndex, returnMonthIndex]);
 
     return (
         <span

@@ -3,9 +3,9 @@
     justify-content: center;
     gap: 30px;
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.52);
-    padding: 40px;
+    padding: 40px 40px 10px 40px;
 
-    min-height: 420px;
+    min-height: 440px;
 }
 .date__header {
     color: #737374;

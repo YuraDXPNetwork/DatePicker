@@ -3,9 +3,17 @@ import { useSelector } from "react-redux";
 import DaySell from "./DaySell";
 
 export default function Days({ month, box }) {
-    const departureMonth = useSelector((state) => state.general.departureMonth);
+    const departureMonthIndex = useSelector(
+        (state) => state.general.departureMonthIndex
+    );
 
-    const returnMonth = useSelector((state) => state.general.returnMonth);
+    const returnMonthIndex = useSelector(
+        (state) => state.general.returnMonthIndex
+    );
+    console.log(
+        "🚀 ~ file: Days.jsx ~ line 13 ~ Days ~ returnMonthIndex",
+        returnMonthIndex
+    );
 
     const calender = useSelector((state) => state.general.calender);
 
@@ -13,15 +21,17 @@ export default function Days({ month, box }) {
         // debugger;
         switch (box) {
             case "departure":
-                if (departureMonth) {
-                    return departureMonth?.thisMonthDays.map((e, index) => (
-                        <DaySell
-                            key={`${index}_${e.Month}`}
-                            day={e}
-                            index={index}
-                            box={box}
-                        />
-                    ));
+                if (departureMonthIndex) {
+                    return calender[departureMonthIndex]?.thisMonthDays.map(
+                        (e, index) => (
+                            <DaySell
+                                key={`${index}_${e.Month}`}
+                                day={e}
+                                index={index}
+                                box={box}
+                            />
+                        )
+                    );
                 } else
                     return calender[0].thisMonthDays.map((e, index) => (
                         <DaySell
@@ -33,15 +43,17 @@ export default function Days({ month, box }) {
                     ));
 
             case "return":
-                if (returnMonth) {
-                    return returnMonth?.thisMonthDays.map((e, index) => (
-                        <DaySell
-                            key={`${index}_${e.Month}`}
-                            day={e}
-                            index={index}
-                            box={box}
-                        />
-                    ));
+                if (returnMonthIndex) {
+                    return calender[returnMonthIndex]?.thisMonthDays.map(
+                        (e, index) => (
+                            <DaySell
+                                key={`${index}_${e.Month}`}
+                                day={e}
+                                index={index}
+                                box={box}
+                            />
+                        )
+                    );
                 } else
                     return calender[0].thisMonthDays.map((e, index) => (
                         <DaySell
@@ -58,7 +70,7 @@ export default function Days({ month, box }) {
 
     useEffect(() => {
         return () => {};
-    }, [departureMonth, departureMonth]);
+    }, [returnMonthIndex, departureMonthIndex]);
 
     return <div className="days">{showDays()}</div>;
 }

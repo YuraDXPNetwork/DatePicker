@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     monthIndex: 0,
     returnMonthIndex: 0,
+    departureMonthIndex: 0,
 };
 
 const generalSlice = createSlice({
@@ -17,6 +18,9 @@ const generalSlice = createSlice({
         },
         setReturnMonthIndex(state, action) {
             state.returnMonthIndex = action.payload;
+        },
+        setDepartureMonthIndex(state, action) {
+            state.departureMonthIndex = action.payload;
         },
         setDepartureMonth(state, action) {
             const { monthIndex, e } = action.payload;
@@ -52,6 +56,7 @@ export const {
     setMonthIndex,
     setReturnMonth,
     setReturnMonthIndex,
+    setDepartureMonthIndex,
     setDepartureMonth,
 } = generalSlice.actions;
 

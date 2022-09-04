@@ -141,16 +141,21 @@ export const getShortName = (e) => {
     }
 };
 
-export const getTitle = (box, departureMonth, calender, returnMonth) => {
+export const getTitle = (
+    box,
+    departureMonthIndex,
+    calender,
+    returnMonthIndex
+) => {
     // debugger;
     switch (box) {
         case "departure":
-            return departureMonth
-                ? `${departureMonth?.Year} ${departureMonth?.Month}`
+            return departureMonthIndex
+                ? `${calender[departureMonthIndex]?.Year} ${calender[departureMonthIndex]?.Month}`
                 : `${calender[0]?.Year} ${calender[0]?.Month}`;
         case "return":
-            return returnMonth
-                ? `${returnMonth?.Year} ${returnMonth?.Month}`
+            return returnMonthIndex
+                ? `${calender[returnMonthIndex]?.Year} ${calender[returnMonthIndex]?.Month}`
                 : `${calender[0]?.Year} ${calender[0]?.Month}`;
         default:
     }

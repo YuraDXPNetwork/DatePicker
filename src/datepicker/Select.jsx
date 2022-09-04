@@ -12,13 +12,17 @@ export default function Select({ box }) {
     const [opened, setOpened] = useState(false);
 
     const calender = useSelector((state) => state.general.calender);
-    const departureMonth = useSelector((state) => state.general.departureMonth);
+    const departureMonthIndex = useSelector(
+        (state) => state.general.departureMonthIndex
+    );
 
-    const returnMonth = useSelector((state) => state.general.returnMonth);
+    const returnMonthIndex = useSelector(
+        (state) => state.general.returnMonthIndex
+    );
 
-    useEffect(() => {
-        if (departureMonth) dispatch(setReturnMonth(departureMonth));
-    }, [departureMonth]);
+    // useEffect(() => {
+    //     if (departureMonth) dispatch(setReturnMonth(departureMonth));
+    // }, [departureMonth]);
 
     return (
         <div
@@ -32,7 +36,12 @@ export default function Select({ box }) {
             </div>
             <div className="select__title">
                 {calender &&
-                    getTitle(box, departureMonth, calender, returnMonth)}
+                    getTitle(
+                        box,
+                        departureMonthIndex,
+                        calender,
+                        returnMonthIndex
+                    )}
             </div>
             <Options opened={opened} box={box} setOpened={setOpened} />
         </div>
