@@ -162,7 +162,7 @@ export const getTitle = (
 };
 
 export const getStyle = (e, departureMonth, calender) => {
-    debugger;
+    // debugger;
 
     const currentMonthNum = moment().month(e.Month).format("YYYYMM");
     const departureMonthNum = moment()

@@ -5,7 +5,10 @@
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.52);
     padding: 40px 40px 10px 40px;
 
-    min-height: 440px;
+    min-height: 460px;
+}
+.departure {
+    position: relative;
 }
 .date__header {
     color: #737374;
@@ -137,6 +140,30 @@
 .day__cell:hover {
     background-color: #347d77;
     color: #f9fcfb;
+}
+
+.tips {
+    position: absolute;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+
+    color: #737374;
+    font-size: 14px;
+
+    bottom: 0;
+    right: 0%;
+}
+
+.tips span:nth-last-child(1) {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background-color: #e4f0f1;
 }
 
 @media screen and (max-width: 768px) {

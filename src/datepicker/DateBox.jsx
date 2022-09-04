@@ -14,6 +14,12 @@ export default function DateBox({ box, week }) {
             <Navigator box={box} />
             <DaysTitle week={week} />
             {calender && <Days box={box} />}
+            {box === "departure" && (
+                <div className="tips">
+                    <span>available departure and return days</span>
+                    <span></span>
+                </div>
+            )}
         </div>
     );
 }
